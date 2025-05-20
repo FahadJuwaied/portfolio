@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Fahad Al-Juwaied Portfolio</title>
+  <style>
+    /* Reset and base */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #0f172a; /* Dark navy background */
+      color: #f8fafc; /* Light text */
+      line-height: 1.6;
+      scroll-behavior: smooth;
+      direction: ltr;
+    }
+    a {
+      color: #38bdf8;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    /* Navbar */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: #1e293b;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 40px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+      z-index: 1000;
+    }
+    nav .name {
+      font-weight: 700;
+      font-size: 1.3rem;
+      color: #a78bfa;
+      cursor: default;
+    }
+    nav button.lang-toggle {
+      background: #8b5cf6;
+      border: none;
+      color: white;
+      font-weight: 600;
+      font-size: 1rem;
+      padding: 8px 18px;
+      border-radius: 25px;
+      cursor: pointer;
+      box-shadow: 0 0 10px #a78bfa;
+      transition: background-color 0.3s ease;
+    }
+    nav button.lang-toggle:hover {
+      background: #7c3aed;
+    }
+
+    /* Container */
+    .container {
+      width: 90%;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 100px 0 40px;
+      position: relative;
+      z-index: 20;
+    }
+
+    /* Hero Section */
+    header.hero {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: flex-start;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      min-height: unset;
+      background: linear-gradient(135deg, #2563eb 0%, #9333ea 100%);
+      text-align: left;
+      padding: 0 0 0 5vw;
+      overflow: hidden;
+      color: #fff;
+      z-index: 10;
+    }
+    header.hero::before {
+      content: '';
+      position: absolute;
+      top: -100px;
+      left: -100px;
+      width: 400px;
+      height: 400px;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 50%;
+      filter: blur(100px);
+      z-index: 1;
+    }
+    header.hero::after {
+      content: '';
+      position: absolute;
+      bottom: -80px;
+      right: -80px;
+      width: 350px;
+      height: 350px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      filter: blur(100px);
+      z-index: 1;
+    }
+    header.hero img {
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      border: 4px solid #fff;
+      margin-bottom: 0;
+      margin-right: 3vw;
+      margin-left: 0;
+      object-fit: cover;
+      box-shadow: 0 0 20px #9333ea;
+      flex-shrink: 0;
+      z-index: 2;
+    }
+    .hero-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      flex: 1;
+      z-index: 2;
+    }
+    header.hero h1#heroName {
+      font-size: 4rem;
+      margin-bottom: 20px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      line-height: 1.1;
+      text-shadow: 0 2px 16px #312e81;
+    }
+    header.hero p#heroDesc {
+      font-size: 1.5rem;
+      max-width: 700px;
+      font-weight: 500;
+      color: #e0e7ff;
+      line-height: 1.4;
+    }
+    body[dir="rtl"] header.hero {
+      flex-direction: row-reverse;
+      text-align: right;
+      padding: 0 5vw 0 0;
+    }
+    body[dir="rtl"] header.hero img {
+      margin-left: 3vw;
+      margin-right: 0;
+    }
+    body[dir="rtl"] .hero-content {
+      align-items: flex-end;
+      text-align: right;
+    }
+    @media (max-width: 900px) {
+      header.hero {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 40px 0 0 0;
+      }
+      body[dir="rtl"] header.hero {
+        flex-direction: column;
+        padding: 40px 0 0 0;
+      }
+      header.hero img {
+        margin: 0 0 20px 0;
+      }
+      body[dir="rtl"] .hero-content {
+        align-items: center;
+        text-align: center;
+      }
+    }
+
+    /* About Me */
+    section#about {
+      background: #1e293b;
+      padding: 50px 20px;
+      border-radius: 12px;
+      margin-bottom: 60px;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    section#about h2 {
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 30px;
+      color: #a78bfa;
+    }
+    section#about p {
+      max-width: 800px;
+      margin: 0 auto 40px auto;
+      font-size: 1.1rem;
+      color: #cbd5e1;
+      text-align: center;
+    }
+    .skills-list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .skill {
+      background: #312e81;
+      padding: 12px 20px;
+      border-radius: 25px;
+      font-weight: 600;
+      color: #fef3c7;
+      box-shadow: 0 0 10px #8b5cf6;
+      user-select: none;
+      transition: transform 0.3s ease;
+      cursor: default;
+    }
+    .skill:hover {
+      transform: scale(1.1);
+    }
+
+    /* Projects Section */
+    section#projects {
+      margin-bottom: 60px;
+    }
+    section#projects h2 {
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 30px;
+      color: #a78bfa;
+    }
+    .projects-grid {
+      display: flex;
+      justify-content: center;
+    }
+    .project-card {
+      background: #1e293b;
+      border-radius: 15px;
+      padding: 20px;
+      box-shadow: 0 0 15px rgba(147, 51, 234, 0.5);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+      direction: ltr;
+    }
+    .project-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 0 25px rgba(147, 51, 234, 0.9);
+    }
+    .project-card h3 {
+      margin-bottom: 12px;
+      color: #fef3c7;
+    }
+    .project-card p {
+      color: #cbd5e1;
+      font-size: 0.95rem;
+      line-height: 1.3;
+    }
+
+    /* Contact Section */
+    section#contact {
+      background: #312e81;
+      min-height: unset;
+      padding: 32px 0 24px 0;
+      border-radius: 12px;
+      text-align: center;
+      color: #fef3c7;
+      margin-bottom: 32px;
+    }
+    section#contact h2 {
+      font-size: 2rem;
+      margin-bottom: 12px;
+    }
+    section#contact p {
+      max-width: 600px;
+      margin: 0 auto 20px auto;
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: #d8b4fe;
+    }
+    .contact-button {
+      padding: 12px 32px;
+      border-radius: 28px;
+      background: #8b5cf6;
+      color: #fff;
+      border: 2px solid #a78bfa;
+      font-size: 1.1rem;
+      font-weight: 600;
+      box-shadow: 0 0 12px #a78bfa44;
+      cursor: pointer;
+      transition: background 0.3s, border-color 0.3s, color 0.3s;
+      display: inline-block;
+      margin-bottom: 18px;
+      text-decoration: none;
+    }
+    .contact-button:hover {
+      background: #7c3aed;
+      border-color: #fef3c7;
+      color: #fef3c7;
+    }
+    .social-links a {
+      margin: 0 10px;
+      font-size: 1.3rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: auto;
+      height: auto;
+      border-radius: 0;
+      background: none;
+      box-shadow: none;
+      transition: filter 0.2s;
+      padding: 0;
+    }
+    .social-links a:hover {
+      background: none;
+      filter: brightness(1.3);
+    }
+    .social-links svg {
+      display: block;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      header.hero h1 {
+        font-size: 2.2rem;
+      }
+      section#about p, section#contact p {
+        font-size: 1rem;
+      }
+      .skills-list {
+        gap: 10px;
+      }
+      .project-card {
+        padding: 15px;
+      }
+      body[dir="rtl"] {
+        direction: rtl;
+      }
+      body[dir="rtl"] nav {
+        flex-direction: row-reverse;
+      }
+    }
+
+    body[dir="rtl"] nav {
+      flex-direction: row-reverse;
+    }
+
+    section#about.container {
+      margin-top: 100vh;
+    }
+
+    section#about,
+    section#projects,
+    section#contact {
+      background: #1e293b;
+      position: relative;
+      z-index: 20;
+    }
+    section#contact {
+      background: #312e81;
+    }
+
+    .site-footer {
+      width: 100%;
+      background: #0f172a;
+      color: #f8fafc;
+      text-align: center;
+      padding: 32px 0 24px 0;
+      font-size: 1.1rem;
+      font-weight: 500;
+      letter-spacing: 1px;
+      position: relative;
+      z-index: 30;
+      box-shadow: 0 -2px 16px #1e293b44;
+    }
+    .footer-content {
+      max-width: 1100px;
+      margin: 0 auto;
+      opacity: 0.8;
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="name">Fahad Al-Juwaied</div>
+    <button class="lang-toggle" id="langToggle">ع</button>
+  </nav>
+
+  <header class="hero">
+    <img src="your-photo.jpg" alt="Fahad Al-Juwaied" />
+    <div class="hero-content">
+      <h1 id="heroName">Fahad Al-Juwaied</h1>
+      <p id="heroDesc">مطور شغوف بدمج الذكاء الاصطناعي — أبني حلول ذكية وقابلة للتوسع تقود المستقبل.</p>
+    </div>
+  </header>
+
+  <section id="about" class="container">
+    <h2 id="aboutTitle">About Me</h2>
+    <p id="aboutDesc">I am a passionate Full Stack Developer with a strong interest in AI integration and automation. I love building seamless digital experiences that blend creativity, technology, and usability. My focus is on delivering innovative solutions that empower users and drive meaningful impact.</p>
+    <div class="skills-list" id="skillsList">
+      <div class="skill">Java</div>
+      <div class="skill">HTML</div>
+      <div class="skill">CSS</div>
+      <div class="skill">Python</div>
+      <div class="skill">n8n Automation</div>
+      <div class="skill">AI Integration</div>
+      <div class="skill">Framer</div>
+      <div class="skill">Webflow</div>
+      <div class="skill">WordPress</div>
+      <div class="skill">Wix</div>
+    </div>
+  </section>
+
+  <section id="projects" class="container">
+    <h2 id="projectsTitle">My Projects</h2>
+    <div class="projects-grid" style="display:flex;justify-content:center;">
+      <div class="project-card" style="max-width:420px;width:100%;margin:0 auto;">
+        <a href="https://latifahlaw.vercel.app/" target="_blank" rel="noopener" style="display:block;">
+          <img src="latifah-law-preview.jpg" alt="Latifah Law" style="width:100%;border-radius:10px;box-shadow:0 2px 12px #0002;object-fit:cover;max-height:220px;">
+        </a>
+        <div style="margin-top:16px;text-align:center;">
+          <div style="font-size:1.15rem;font-weight:700;color:#fef3c7;">Latifah Law</div>
+          <div style="font-size:1.05rem;color:#a78bfa;">مكتب لطيفة للمحاماة</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2 id="contactTitle">Get in Touch</h2>
+    <p id="contactDesc">If you're ready to build something amazing together or just want to say hello, don't hesitate to reach out.</p>
+    <a href="https://wa.me/966559911745" target="_blank" rel="noopener" class="contact-button" id="contactBtn">Contact Me</a>
+    <div class="social-links" id="socialLinks">
+      <a href="https://www.linkedin.com/in/fahad-aljuwaied/" aria-label="LinkedIn" target="_blank" rel="noopener">
+        <svg width="28" height="28" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="32" height="32" rx="6" fill="#0A66C2"/>
+          <path d="M10.666 13.333h2.667v8h-2.667v-8zm1.333-4a1.333 1.333 0 110 2.667 1.333 1.333 0 010-2.667zm3.334 4h2.56v1.093h.037c.356-.675 1.226-1.387 2.523-1.387 2.7 0 3.2 1.776 3.2 4.083v4.211h-2.667v-3.733c0-.891-.016-2.037-1.241-2.037-1.242 0-1.432.97-1.432 1.97v3.8h-2.667v-8z" fill="#fff"/>
+        </svg>
+      </a>
+      <a href="https://x.com/fahadjuwaied" aria-label="X" target="_blank" rel="noopener">
+        <svg width="28" height="28" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="32" height="32" rx="6" fill="#000"/>
+          <path d="M21.7 10.3h-1.4l-4.3 4.3-4.3-4.3h-1.4l5 5-5 5h1.4l4.3-4.3 4.3 4.3h1.4l-5-5 5-5z" fill="#fff"/>
+        </svg>
+      </a>
+      <a href="mailto:aljuwaiedfahad@gmail.com" aria-label="Email">
+        <svg width="28" height="28" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="32" height="32" rx="6" fill="#EA4335"/>
+          <path d="M8 10.667v10.666c0 .736.597 1.334 1.333 1.334h13.334c.736 0 1.333-.598 1.333-1.334V10.667c0-.736-.597-1.334-1.333-1.334H9.333A1.333 1.333 0 008 10.667zm16 0l-8 6.667-8-6.667" fill="#fff"/>
+        </svg>
+      </a>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="footer-content">&copy; 2024 Fahad Al-Juwaied. All rights reserved.</div>
+  </footer>
+
+  <script>
+    const langToggle = document.getElementById('langToggle');
+    let isArabic = false;
+
+    // Fade out hero on scroll
+    const hero = document.querySelector('header.hero');
+    const heroContent = document.querySelector('.hero-content');
+    const heroImg = document.querySelector('header.hero img');
+    window.addEventListener('scroll', () => {
+      const scrollY = window.scrollY;
+      const fadeStart = 0;
+      const fadeEnd = window.innerHeight * 0.7; // Start fading after 0px, fully faded at 70% of hero height
+      let opacity = 1;
+      if (scrollY > fadeStart) {
+        opacity = 1 - Math.min((scrollY - fadeStart) / (fadeEnd - fadeStart), 1);
+      }
+      heroContent.style.opacity = opacity;
+      heroImg.style.opacity = opacity;
+    });
+
+    langToggle.addEventListener('click', () => {
+      isArabic = !isArabic;
+
+      if(isArabic) {
+        document.documentElement.setAttribute('lang', 'ar');
+        document.body.setAttribute('dir', 'rtl');
+        langToggle.textContent = 'EN';
+
+        // Change all text to Arabic
+        document.querySelector('.name').textContent = 'فهد الجويعد';
+
+        document.getElementById('heroName').textContent = 'فهد الجويعد';
+        document.getElementById('heroDesc').textContent = 'مطور شغوف بدمج الذكاء الاصطناعي — أبني حلول ذكية وقابلة للتوسع تقود المستقبل.';
+
+        document.getElementById('aboutTitle').textContent = 'عني';
+        document.getElementById('aboutDesc').textContent = "أنا مطور شغوف بالذكاء الاصطناعي والأتمتة. أحب بناء تجارب رقمية سلسة تجمع بين الإبداع والتقنية وسهولة الاستخدام. أركز على تقديم حلول مبتكرة تمكّن المستخدمين وتحقق تأثيراً ملموساً.";
+
+        // Skills in Arabic (keep in English as requested)
+        const skills = ['Java', 'HTML', 'CSS', 'Python', 'n8n Automation', 'AI Integration', 'Framer', 'Webflow', 'WordPress', 'Wix'];
+        const skillsList = document.getElementById('skillsList');
+        skillsList.innerHTML = '';
+        skills.forEach(skill => {
+          const skillDiv = document.createElement('div');
+          skillDiv.className = 'skill';
+          skillDiv.textContent = skill;
+          skillsList.appendChild(skillDiv);
+        });
+
+        document.getElementById('projectsTitle').textContent = 'مشاريعي';
+
+        document.getElementById('contactTitle').textContent = 'تواصل معي';
+        document.getElementById('contactDesc').textContent = "إذا كنت مستعدًا لبناء شيء رائع معًا أو تريد فقط إلقاء التحية، لا تتردد في التواصل.";
+        document.getElementById('contactBtn').textContent = 'تواصل معي';
+
+        // Social Links labels can be added if desired (not text content since icons or logos used)
+      } else {
+        document.documentElement.setAttribute('lang', 'en');
+        document.body.setAttribute('dir', 'ltr');
+        langToggle.textContent = 'ع';
+
+        // Change all text back to English
+        document.querySelector('.name').textContent = 'Fahad Al-Juwaied';
+
+        document.getElementById('heroName').textContent = 'Fahad Al-Juwaied';
+        document.getElementById('heroDesc').textContent = 'Full Stack Developer with a passion for AI integration — building smart, scalable solutions that power the future.';
+
+        document.getElementById('aboutTitle').textContent = 'About Me';
+        document.getElementById('aboutDesc').textContent = 'I am a passionate Full Stack Developer with a strong interest in AI integration and automation. I love building seamless digital experiences that blend creativity, technology, and usability. My focus is on delivering innovative solutions that empower users and drive meaningful impact.';
+
+        // Skills in English
+        const skills = ['Java', 'HTML', 'CSS', 'Python', 'n8n Automation', 'AI Integration', 'Framer', 'Webflow', 'WordPress', 'Wix'];
+        const skillsList = document.getElementById('skillsList');
+        skillsList.innerHTML = '';
+        skills.forEach(skill => {
+          const skillDiv = document.createElement('div');
+          skillDiv.className = 'skill';
+          skillDiv.textContent = skill;
+          skillsList.appendChild(skillDiv);
+        });
+
+        document.getElementById('projectsTitle').textContent = 'My Projects';
+
+        document.getElementById('contactTitle').textContent = 'Get in Touch';
+        document.getElementById('contactDesc').textContent = "If you're ready to build something amazing together or just want to say hello, don't hesitate to reach out.";
+        document.getElementById('contactBtn').textContent = 'Contact Me';
+      }
+    });
+
+    // WhatsApp button: open WhatsApp Web on desktop, WhatsApp app on mobile
+    const contactBtn = document.getElementById('contactBtn');
+    contactBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      const phone = '966559911745';
+      const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+      let url = '';
+      if (isMobile) {
+        url = `whatsapp://send?phone=${phone}`;
+      } else {
+        url = `https://web.whatsapp.com/send?phone=${phone}`;
+      }
+      window.open(url, '_blank');
+    });
+  </script>
+
+</body>
+</html> 
