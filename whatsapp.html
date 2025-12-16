@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>WhatsApp Coexistence</title>
+</head>
+<body>
+
+<h2>WhatsApp Coexistence Launcher</h2>
+
+<button onclick="launch()">Start WhatsApp Coexistence</button>
+
+<script async defer crossorigin="anonymous"
+  src="https://connect.facebook.net/en_US/sdk.js"></script>
+
+<script>
+  window.fbAsyncInit = function () {
+    FB.init({
+      appId: "1259968159160475",
+      version: "v24.0",
+      xfbml: true
+    });
+  };
+
+  window.addEventListener("message", function (event) {
+    if (!event.origin.endsWith("facebook.com")) return;
+    try {
+      const data = JSON.parse(event.data);
+      if (data.type === "WA_EMBEDDED_SIGNUP") {
+        console.log("RESULT:", data);
+        alert("Finished. Open console.");
+      }
+    } catch {}
+  });
+
+  function launch() {
+    FB.login(function (response) {
+      console.log("LOGIN RESPONSE:", response);
+    }, {
+      config_id: "1832435037379563",
+      response_type: "code",
+      override_default_response_type: true,
+      extras: {
+        setup: {},
+        featureType: "whatsapp_business_app_onboarding",
+        sessionInfoVersion: "3"
+      }
+    });
+  }
+</script>
+
+</body>
+</html>
