@@ -10,39 +10,36 @@
   <h2>WhatsApp Coexistence</h2>
 
   <button
+    id="waBtn"
     onclick="launchWhatsAppSignup()"
     style="background-color:#1877f2;border:0;border-radius:4px;color:#fff;cursor:pointer;font-family:Helvetica,Arial,sans-serif;font-size:16px;font-weight:bold;height:40px;padding:0 24px;"
   >
     Start WhatsApp Coexistence
   </button>
 
-  <!-- Facebook SDK -->
-  <script async defer crossorigin="anonymous"
-    src="https://connect.facebook.net/en_US/sdk.js"></script>
+  <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
 
   <script>
-    /* ===================== CONFIG ===================== */
     const APP_ID = "1259968159160475";
     const CONFIG_ID = "797659309527789";
     const GRAPH_API_VERSION = "v24.0";
 
-    const N8N_WEBHOOK_URL =
-      "https://fjuwaied.app.n8n.cloud/webhook/wa-es-capture";
+    const N8N_WEBHOOK_URL = "https://fjuwaied.app.n8n.cloud/webhook/wa-es-capture";
 
-    /* ===================== POST TO N8N ===================== */
+    // Prevent spamming OAuth (rate limit)
+    let WA_LOCK = false;
+
+    // We store the WA embedded signup message here (contains waba_id / phone_number_id / business_id)
+    let lastWaMessage = null;
+
     async function postToN8n(payload) {
-      try {
-        await fetch(N8N_WEBHOOK_URL, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload)
-        });
-      } catch (e) {
-        console.error("Failed posting to n8n", e);
-      }
+      await fetch(N8N_WEBHOOK_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
     }
 
-    /* ===================== FB INIT ===================== */
     window.fbAsyncInit = function () {
       FB.init({
         appId: APP_ID,
@@ -52,48 +49,46 @@
       });
     };
 
-    /* ===================== SESSION LOGGING (ASSETS) ===================== */
+    // Capture the embedded signup message (assets)
     window.addEventListener("message", (event) => {
       if (!event.origin.endsWith("facebook.com")) return;
 
       try {
         const data = JSON.parse(event.data);
-
         if (data?.type === "WA_EMBEDDED_SIGNUP") {
-          console.log("WA SIGNUP MESSAGE:", data);
-
-          postToN8n({
-            source: "embedded_signup_message",
-            received_at: new Date().toISOString(),
-            payload: data
-          });
+          lastWaMessage = data; // store it so we can attach it to the code later
         }
       } catch {
-        /* ignore non-json */
+        // ignore
       }
     });
 
-    /* ===================== LOGIN CALLBACK (CODE) ===================== */
     function fbLoginCallback(response) {
-      if (response?.authResponse?.code) {
-        console.log("OAUTH CODE:", response.authResponse.code);
+      const code = response?.authResponse?.code || null;
 
-        postToN8n({
-          source: "embedded_signup_code",
-          received_at: new Date().toISOString(),
-          code: response.authResponse.code
-        });
-      } else {
-        postToN8n({
-          source: "embedded_signup_no_code",
-          received_at: new Date().toISOString(),
-          payload: response || null
-        });
-      }
+      // Send ONE object to n8n that includes BOTH code + assets together
+      postToN8n({
+        source: "wa_embedded_signup_bundle",
+        received_at: new Date().toISOString(),
+        code,
+        wa: lastWaMessage
+      });
+
+      // unlock shortly after (avoid rate limit)
+      setTimeout(() => { WA_LOCK = false; }, 20000);
+      const btn = document.getElementById("waBtn");
+      if (btn) btn.disabled = false;
     }
 
-    /* ===================== LAUNCH ===================== */
     function launchWhatsAppSignup() {
+      if (WA_LOCK) return;
+      WA_LOCK = true;
+
+      const btn = document.getElementById("waBtn");
+      if (btn) btn.disabled = true;
+
+      lastWaMessage = null;
+
       FB.login(fbLoginCallback, {
         config_id: CONFIG_ID,
         response_type: "code",
