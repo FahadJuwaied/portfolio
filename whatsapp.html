@@ -1,50 +1,82 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>WhatsApp Coexistence</title>
+  <meta charset="UTF-8" />
+  <title>WhatsApp Coexistence Launcher</title>
 </head>
 <body>
 
-<h2>WhatsApp Coexistence Launcher</h2>
+<h1>WhatsApp Coexistence Launcher</h1>
+<button onclick="launchWhatsAppSignup()">Start WhatsApp Coexistence</button>
 
-<button onclick="launch()">Start WhatsApp Coexistence</button>
-
+<!-- Meta SDK -->
 <script async defer crossorigin="anonymous"
-  src="https://connect.facebook.net/en_US/sdk.js"></script>
+  src="https://connect.facebook.net/en_US/sdk.js">
+</script>
 
 <script>
+  // ===== CONFIG =====
+  const APP_ID = '1259968159160475';
+  const CONFIG_ID = '1832435037379563';
+  const GRAPH_VERSION = 'v24.0';
+  const N8N_WEBHOOK = 'https://fjuwaied.app.n8n.cloud/webhook/wa-es-capture';
+  // ==================
+
+  function sendToN8n(payload) {
+    fetch(N8N_WEBHOOK, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    }).catch(err => console.error('n8n error', err));
+  }
+
   window.fbAsyncInit = function () {
     FB.init({
-      appId: "1259968159160475",
-      version: "v24.0",
-      xfbml: true
+      appId: APP_ID,
+      autoLogAppEvents: true,
+      xfbml: true,
+      version: GRAPH_VERSION
     });
   };
 
-  window.addEventListener("message", function (event) {
-    if (!event.origin.endsWith("facebook.com")) return;
+  // Capture WABA / phone_number_id / business_id
+  window.addEventListener('message', (event) => {
+    if (!event.origin.endsWith('facebook.com')) return;
+
+    let parsed;
     try {
-      const data = JSON.parse(event.data);
-      if (data.type === "WA_EMBEDDED_SIGNUP") {
-        console.log("RESULT:", data);
-        alert("Finished. Open console.");
-      }
-    } catch {}
+      parsed = JSON.parse(event.data);
+    } catch {
+      return;
+    }
+
+    if (parsed?.type === 'WA_EMBEDDED_SIGNUP') {
+      console.log('WA EVENT:', parsed);
+      sendToN8n({
+        source: 'wa_embedded_event',
+        payload: parsed
+      });
+    }
   });
 
-  function launch() {
-    FB.login(function (response) {
-      console.log("LOGIN RESPONSE:", response);
-    }, {
-      config_id: "1832435037379563",
-      response_type: "code",
+  // Capture OAuth CODE (30 sec TTL)
+  function fbLoginCallback(response) {
+    console.log('LOGIN RESPONSE:', response);
+
+    if (response?.authResponse?.code) {
+      sendToN8n({
+        source: 'oauth_code',
+        code: response.authResponse.code
+      });
+    }
+  }
+
+  function launchWhatsAppSignup() {
+    FB.login(fbLoginCallback, {
+      config_id: CONFIG_ID,
+      response_type: 'code',
       override_default_response_type: true,
-      extras: {
-        setup: {},
-        featureType: "whatsapp_business_app_onboarding",
-        sessionInfoVersion: "3"
-      }
+      extras: { setup: {} }
     });
   }
 </script>
