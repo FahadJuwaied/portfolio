@@ -13,14 +13,13 @@
     }
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #0f172a; /* Dark navy background */
-      color: #f8fafc; /* Light text */
+      background: #17171a; /* Soft charcoal, easier on the eyes than pure black */
+      color: #e4e4e6;
       line-height: 1.6;
       scroll-behavior: smooth;
-      direction: ltr;
     }
     a {
-      color: #38bdf8;
+      color: #a8adb5;
       text-decoration: none;
     }
     a:hover {
@@ -31,34 +30,22 @@
       position: fixed;
       top: 0;
       width: 100%;
-      background: #1e293b;
+      background: #1c1c1f;
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
       align-items: center;
       padding: 15px 40px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.4);
       z-index: 1000;
+      border-bottom: 1px solid #2c2c30;
     }
     nav .name {
       font-weight: 700;
       font-size: 1.3rem;
-      color: #a78bfa;
+      color: #d6d8db;
       cursor: default;
-    }
-    nav button.lang-toggle {
-      background: #8b5cf6;
-      border: none;
-      color: white;
-      font-weight: 600;
-      font-size: 1rem;
-      padding: 8px 18px;
-      border-radius: 25px;
-      cursor: pointer;
-      box-shadow: 0 0 10px #a78bfa;
-      transition: background-color 0.3s ease;
-    }
-    nav button.lang-toggle:hover {
-      background: #7c3aed;
+      letter-spacing: 0.5px;
+      white-space: nowrap;
     }
 
     /* Container */
@@ -83,47 +70,23 @@
       width: 100vw;
       height: 100vh;
       min-height: unset;
-      background: linear-gradient(135deg, #2563eb 0%, #9333ea 100%);
+      background: radial-gradient(circle at 30% 40%, #232326 0%, #17171a 70%);
       text-align: left;
       padding: 0 0 0 5vw;
       overflow: hidden;
       color: #fff;
       z-index: 10;
     }
-    header.hero::before {
-      content: '';
-      position: absolute;
-      top: -100px;
-      left: -100px;
-      width: 400px;
-      height: 400px;
-      background: rgba(255, 255, 255, 0.15);
-      border-radius: 50%;
-      filter: blur(100px);
-      z-index: 1;
-    }
-    header.hero::after {
-      content: '';
-      position: absolute;
-      bottom: -80px;
-      right: -80px;
-      width: 350px;
-      height: 350px;
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 50%;
-      filter: blur(100px);
-      z-index: 1;
-    }
     header.hero img {
       width: 220px;
       height: 220px;
       border-radius: 50%;
-      border: 4px solid #fff;
+      border: 3px solid #6b6f76;
       margin-bottom: 0;
       margin-right: 3vw;
       margin-left: 0;
       object-fit: cover;
-      box-shadow: 0 0 20px #9333ea;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
       flex-shrink: 0;
       z-index: 2;
     }
@@ -135,32 +98,20 @@
       z-index: 2;
     }
     header.hero h1#heroName {
-      font-size: 4rem;
+      font-size: clamp(1.5rem, 7vw, 4rem);
       margin-bottom: 20px;
-      font-weight: 900;
-      letter-spacing: 2px;
+      font-weight: 800;
+      letter-spacing: 1px;
       line-height: 1.1;
-      text-shadow: 0 2px 16px #312e81;
+      color: #f0f0f1;
+      white-space: nowrap;
     }
     header.hero p#heroDesc {
-      font-size: 1.5rem;
+      font-size: 1.4rem;
       max-width: 700px;
-      font-weight: 500;
-      color: #e0e7ff;
-      line-height: 1.4;
-    }
-    body[dir="rtl"] header.hero {
-      flex-direction: row-reverse;
-      text-align: right;
-      padding: 0 5vw 0 0;
-    }
-    body[dir="rtl"] header.hero img {
-      margin-left: 3vw;
-      margin-right: 0;
-    }
-    body[dir="rtl"] .hero-content {
-      align-items: flex-end;
-      text-align: right;
+      font-weight: 400;
+      color: #b4b6ba;
+      line-height: 1.5;
     }
     @media (max-width: 900px) {
       header.hero {
@@ -170,67 +121,68 @@
         text-align: center;
         padding: 80px 0 0 0;
       }
-      body[dir="rtl"] header.hero {
-        flex-direction: column;
-        padding: 80px 0 0 0;
-      }
       header.hero img {
         margin: 0 0 20px 0;
-        transform: translateY(40px); /* Lower the image */
+        transform: translateY(40px);
       }
       .hero-content {
-        transform: translateY(-20px); /* Raise the text */
-      }
-      body[dir="rtl"] .hero-content {
-        align-items: center;
-        text-align: center;
+        transform: translateY(-20px);
       }
     }
 
     /* About Me */
     section#about {
-      background: #1e293b;
+      background: #1c1c1f;
       padding: 50px 20px;
       border-radius: 12px;
       margin-bottom: 60px;
       max-width: 900px;
       margin-left: auto;
       margin-right: auto;
+      border: 1px solid #2c2c30;
     }
     section#about h2 {
       text-align: center;
-      font-size: 2.5rem;
+      font-size: 2.3rem;
       margin-bottom: 30px;
-      color: #a78bfa;
+      color: #d6d8db;
+      font-weight: 700;
     }
     section#about p {
       max-width: 800px;
       margin: 0 auto 40px auto;
-      font-size: 1.1rem;
-      color: #cbd5e1;
+      font-size: 1.05rem;
+      color: #b4b6ba;
       text-align: center;
     }
     .skills-list {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 15px;
+      gap: 12px;
       max-width: 700px;
       margin: 0 auto;
     }
     .skill {
-      background: #312e81;
-      padding: 12px 20px;
-      border-radius: 25px;
+      background: #232326;
+      padding: 10px 18px;
+      border-radius: 20px;
       font-weight: 600;
-      color: #fef3c7;
-      box-shadow: 0 0 10px #8b5cf6;
+      font-size: 0.92rem;
+      color: #e4e4e6;
+      border: 1px solid #34343a;
       user-select: none;
-      transition: transform 0.3s ease;
+      transition: border-color 0.2s ease, transform 0.2s ease;
       cursor: default;
     }
     .skill:hover {
-      transform: scale(1.1);
+      transform: translateY(-2px);
+      border-color: #6b6f76;
+    }
+    .skill.ai-skill {
+      background: #2b2b30;
+      color: #cfd2d6;
+      border: 1px solid #565a62;
     }
 
     /* Projects Section */
@@ -239,77 +191,101 @@
     }
     section#projects h2 {
       text-align: center;
-      font-size: 2.5rem;
+      font-size: 2.3rem;
       margin-bottom: 30px;
-      color: #a78bfa;
+      color: #d6d8db;
+      font-weight: 700;
     }
     .projects-grid {
       display: flex;
+      flex-wrap: wrap;
       justify-content: center;
+      gap: 22px;
     }
     .project-card {
-      background: #1e293b;
-      border-radius: 15px;
-      padding: 20px;
-      box-shadow: 0 0 15px rgba(147, 51, 234, 0.5);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      cursor: pointer;
-      direction: ltr;
+      background: #1c1c1f;
+      border-radius: 14px;
+      padding: 22px;
+      border: 1px solid #2c2c30;
+      transition: transform 0.25s ease, border-color 0.25s ease;
+      cursor: default;
+      max-width: 340px;
+      width: 100%;
     }
     .project-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 0 25px rgba(147, 51, 234, 0.9);
+      transform: translateY(-6px);
+      border-color: #55585f;
     }
-    .project-card h3 {
+    .project-tag {
+      display: inline-block;
+      background: #2b2b30;
+      color: #b4b6ba;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 20px;
       margin-bottom: 12px;
-      color: #fef3c7;
+      border: 1px solid #3a3a40;
     }
-    .project-card p {
-      color: #cbd5e1;
-      font-size: 0.95rem;
-      line-height: 1.3;
+    .project-card-body {
+      margin-top: 14px;
+      text-align: left;
+    }
+    .project-card-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #eaeaec;
+    }
+    .project-card-desc {
+      font-size: 0.9rem;
+      color: #a9abaf;
+      margin-top: 10px;
+      line-height: 1.5;
     }
 
     /* Contact Section */
     section#contact {
-      background: #312e81;
+      background: #1c1c1f;
       min-height: unset;
-      padding: 32px 0 24px 0;
+      padding: 36px 0 28px 0;
       border-radius: 12px;
       text-align: center;
-      color: #fef3c7;
+      color: #e4e4e6;
       margin-bottom: 32px;
+      border: 1px solid #2c2c30;
     }
     section#contact h2 {
-      font-size: 2rem;
+      font-size: 1.9rem;
       margin-bottom: 12px;
+      color: #d6d8db;
+      font-weight: 700;
     }
     section#contact p {
       max-width: 600px;
       margin: 0 auto 20px auto;
-      font-size: 1.1rem;
-      font-weight: 500;
-      color: #d8b4fe;
+      font-size: 1.05rem;
+      font-weight: 400;
+      color: #b4b6ba;
     }
     .contact-button {
-      padding: 12px 32px;
-      border-radius: 28px;
-      background: #8b5cf6;
-      color: #fff;
-      border: 2px solid #a78bfa;
-      font-size: 1.1rem;
+      padding: 12px 30px;
+      border-radius: 26px;
+      background: #e4e4e6;
+      color: #17171a;
+      border: 2px solid #e4e4e6;
+      font-size: 1.05rem;
       font-weight: 600;
-      box-shadow: 0 0 12px #a78bfa44;
       cursor: pointer;
-      transition: background 0.3s, border-color 0.3s, color 0.3s;
+      transition: background 0.25s, color 0.25s;
       display: inline-block;
       margin-bottom: 18px;
       text-decoration: none;
     }
     .contact-button:hover {
-      background: #7c3aed;
-      border-color: #fef3c7;
-      color: #fef3c7;
+      background: transparent;
+      color: #e4e4e6;
     }
     .social-links a {
       margin: 0 10px;
@@ -317,17 +293,10 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: auto;
-      height: auto;
-      border-radius: 0;
-      background: none;
-      box-shadow: none;
       transition: filter 0.2s;
-      padding: 0;
     }
     .social-links a:hover {
-      background: none;
-      filter: brightness(1.3);
+      filter: brightness(1.25);
     }
     .social-links svg {
       display: block;
@@ -335,8 +304,11 @@
 
     /* Responsive */
     @media (max-width: 600px) {
-      header.hero h1 {
-        font-size: 2.2rem;
+      nav {
+        padding: 12px 18px;
+      }
+      nav .name {
+        font-size: 1.05rem;
       }
       section#about p, section#contact p {
         font-size: 1rem;
@@ -345,18 +317,8 @@
         gap: 10px;
       }
       .project-card {
-        padding: 15px;
+        padding: 16px;
       }
-      body[dir="rtl"] {
-        direction: rtl;
-      }
-      body[dir="rtl"] nav {
-        flex-direction: row-reverse;
-      }
-    }
-
-    body[dir="rtl"] nav {
-      flex-direction: row-reverse;
     }
 
     section#about.container {
@@ -366,26 +328,22 @@
     section#about,
     section#projects,
     section#contact {
-      background: #1e293b;
       position: relative;
       z-index: 20;
-    }
-    section#contact {
-      background: #312e81;
     }
 
     .site-footer {
       width: 100%;
-      background: #0f172a;
-      color: #f8fafc;
+      background: #121214;
+      color: #9a9ca0;
       text-align: center;
-      padding: 32px 0 24px 0;
-      font-size: 1.1rem;
-      font-weight: 500;
-      letter-spacing: 1px;
+      padding: 30px 0 22px 0;
+      font-size: 1rem;
+      font-weight: 400;
+      letter-spacing: 0.5px;
       position: relative;
       z-index: 30;
-      box-shadow: 0 -2px 16px #1e293b44;
+      border-top: 1px solid #2c2c30;
     }
     .footer-content {
       max-width: 1100px;
@@ -398,27 +356,27 @@
 
   <nav>
     <div class="name">Fahad Al-Juwaied</div>
-    <button class="lang-toggle" id="langToggle">ع</button>
   </nav>
 
   <header class="hero">
     <img src="your-photo.jpg" alt="Fahad Al-Juwaied" />
     <div class="hero-content">
       <h1 id="heroName">Fahad Al-Juwaied</h1>
-      <p id="heroDesc">Full Stack Developer with a passion for AI integration — building smart, scalable solutions that power the future.</p>
+      <p id="heroDesc">AI Developer &amp; Web Developer — I build AI agents that handle real business tasks and websites that bring them to life.</p>
     </div>
   </header>
 
   <section id="about" class="container">
     <h2 id="aboutTitle">About Me</h2>
-    <p id="aboutDesc">I am a passionate Full Stack Developer with a strong interest in AI integration and automation. I love building seamless digital experiences that blend creativity, technology, and usability. My focus is on delivering innovative solutions that empower users and drive meaningful impact.</p>
+    <p id="aboutDesc">I'm a Full Stack and AI Developer who builds both the interfaces businesses use and the automated agents running behind them. I design and deploy AI agents with n8n — for customer service, content creation, and scheduling — alongside custom websites built end-to-end. I care about solutions that actually do the work, not just answer questions.</p>
     <div class="skills-list" id="skillsList">
+      <div class="skill ai-skill">AI Agent Development</div>
+      <div class="skill ai-skill">n8n Automation</div>
+      <div class="skill ai-skill">AI Integration</div>
+      <div class="skill">Python</div>
       <div class="skill">Java</div>
       <div class="skill">HTML</div>
       <div class="skill">CSS</div>
-      <div class="skill">Python</div>
-      <div class="skill">n8n Automation</div>
-      <div class="skill">AI Integration</div>
       <div class="skill">Framer</div>
       <div class="skill">Webflow</div>
       <div class="skill">WordPress</div>
@@ -428,14 +386,28 @@
 
   <section id="projects" class="container">
     <h2 id="projectsTitle">My Projects</h2>
-    <div class="projects-grid" style="display:flex;justify-content:center;">
-      <div class="project-card" style="max-width:420px;width:100%;margin:0 auto;">
-        <a href="https://latifahlaw.vercel.app/" target="_blank" rel="noopener" style="display:block;">
-          <img src="latifah-law-preview.jpg" alt="Latifah Law" style="width:100%;border-radius:10px;box-shadow:0 2px 12px #0002;object-fit:cover;max-height:220px;">
-        </a>
-        <div style="margin-top:16px;text-align:center;">
-          <div style="font-size:1.15rem;font-weight:700;color:#fef3c7;">Latifah Law</div>
-          <div style="font-size:1.05rem;color:#a78bfa;">مكتب لطيفة للمحاماة</div>
+    <div class="projects-grid">
+      <div class="project-card">
+        <span class="project-tag">AI Agent</span>
+        <div class="project-card-body">
+          <div class="project-card-title">WhatsApp Customer Service Agent</div>
+          <div class="project-card-desc">An AI agent that answers customer questions from a company's knowledge base and books and schedules appointments automatically over WhatsApp — no human agent required.</div>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <span class="project-tag">AI Agent</span>
+        <div class="project-card-body">
+          <div class="project-card-title">LinkedIn Content Agent</div>
+          <div class="project-card-desc">An agent that studies creators you admire and your own interests, then drafts on-brand LinkedIn posts for you automatically, ready to review and publish.</div>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <span class="project-tag">AI Agent</span>
+        <div class="project-card-body">
+          <div class="project-card-title">Executive Scheduling Agent</div>
+          <div class="project-card-desc">An agent that takes tasks and meeting requests from employees, then tells the manager their schedule on demand — keeping busy execs on top of their day without manual coordination.</div>
         </div>
       </div>
     </div>
@@ -478,91 +450,19 @@
       window.location.href = 'https://www.linkedin.com/in/fahad-aljuwaied';
     });
 
-    const langToggle = document.getElementById('langToggle');
-    let isArabic = false;
-
     // Fade out hero on scroll
-    const hero = document.querySelector('header.hero');
     const heroContent = document.querySelector('.hero-content');
     const heroImg = document.querySelector('header.hero img');
     window.addEventListener('scroll', () => {
       const scrollY = window.scrollY;
       const fadeStart = 0;
-      const fadeEnd = window.innerHeight * 0.7; // Start fading after 0px, fully faded at 70% of hero height
+      const fadeEnd = window.innerHeight * 0.7;
       let opacity = 1;
       if (scrollY > fadeStart) {
         opacity = 1 - Math.min((scrollY - fadeStart) / (fadeEnd - fadeStart), 1);
       }
       heroContent.style.opacity = opacity;
       heroImg.style.opacity = opacity;
-    });
-
-    langToggle.addEventListener('click', () => {
-      isArabic = !isArabic;
-
-      if(isArabic) {
-        document.documentElement.setAttribute('lang', 'ar');
-        document.body.setAttribute('dir', 'rtl');
-        langToggle.textContent = 'EN';
-
-        // Change all text to Arabic
-        document.querySelector('.name').textContent = 'فهد الجويعد';
-
-        document.getElementById('heroName').textContent = 'فهد الجويعد';
-        document.getElementById('heroDesc').textContent = 'مطور شغوف بدمج الذكاء الاصطناعي — أبني حلول ذكية وقابلة للتوسع تقود المستقبل.';
-
-        document.getElementById('aboutTitle').textContent = 'عني';
-        document.getElementById('aboutDesc').textContent = "أنا مطور شغوف بالذكاء الاصطناعي والأتمتة. أحب بناء تجارب رقمية سلسة تجمع بين الإبداع والتقنية وسهولة الاستخدام. أركز على تقديم حلول مبتكرة تمكّن المستخدمين وتحقق تأثيراً ملموساً.";
-
-        // Skills in Arabic (keep in English as requested)
-        const skills = ['Java', 'HTML', 'CSS', 'Python', 'n8n Automation', 'AI Integration', 'Framer', 'Webflow', 'WordPress', 'Wix'];
-        const skillsList = document.getElementById('skillsList');
-        skillsList.innerHTML = '';
-        skills.forEach(skill => {
-          const skillDiv = document.createElement('div');
-          skillDiv.className = 'skill';
-          skillDiv.textContent = skill;
-          skillsList.appendChild(skillDiv);
-        });
-
-        document.getElementById('projectsTitle').textContent = 'مشاريعي';
-
-        document.getElementById('contactTitle').textContent = 'تواصل معي';
-        document.getElementById('contactDesc').textContent = "إذا كنت مستعدًا لبناء شيء رائع معًا أو تريد فقط إلقاء التحية، لا تتردد في التواصل.";
-        document.getElementById('contactBtn').textContent = 'تواصل معي';
-
-        // Social Links labels can be added if desired (not text content since icons or logos used)
-      } else {
-        document.documentElement.setAttribute('lang', 'en');
-        document.body.setAttribute('dir', 'ltr');
-        langToggle.textContent = 'ع';
-
-        // Change all text back to English
-        document.querySelector('.name').textContent = 'Fahad Al-Juwaied';
-
-        document.getElementById('heroName').textContent = 'Fahad Al-Juwaied';
-        document.getElementById('heroDesc').textContent = 'Full Stack Developer with a passion for AI integration — building smart, scalable solutions that power the future.';
-
-        document.getElementById('aboutTitle').textContent = 'About Me';
-        document.getElementById('aboutDesc').textContent = 'I am a passionate Full Stack Developer with a strong interest in AI integration and automation. I love building seamless digital experiences that blend creativity, technology, and usability. My focus is on delivering innovative solutions that empower users and drive meaningful impact.';
-
-        // Skills in English
-        const skills = ['Java', 'HTML', 'CSS', 'Python', 'n8n Automation', 'AI Integration', 'Framer', 'Webflow', 'WordPress', 'Wix'];
-        const skillsList = document.getElementById('skillsList');
-        skillsList.innerHTML = '';
-        skills.forEach(skill => {
-          const skillDiv = document.createElement('div');
-          skillDiv.className = 'skill';
-          skillDiv.textContent = skill;
-          skillsList.appendChild(skillDiv);
-        });
-
-        document.getElementById('projectsTitle').textContent = 'My Projects';
-
-        document.getElementById('contactTitle').textContent = 'Get in Touch';
-        document.getElementById('contactDesc').textContent = "If you're ready to build something amazing together or just want to say hello, don't hesitate to reach out.";
-        document.getElementById('contactBtn').textContent = 'Contact Me';
-      }
     });
 
     // WhatsApp button: open WhatsApp Web on desktop, WhatsApp app on mobile
@@ -582,4 +482,4 @@
   </script>
 
 </body>
-</html> 
+</html>
